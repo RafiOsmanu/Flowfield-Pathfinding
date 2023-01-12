@@ -58,7 +58,7 @@ Like mentionedbefore u do this for every node until every node has a vector
 This is the last step and the easiest one, you just have to check which node is at the position of your agent
 and then set the agents velocity to that of the vector that is present in that node * your agents maxVelocity
 
-### Prerequisites
+### Design/Implementation 
 
 This is an example of how to list things you need to use the software and how to install them.
 * npm
