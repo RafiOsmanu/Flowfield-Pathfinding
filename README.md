@@ -54,7 +54,9 @@
 ![FlowFieldGiphy](https://user-images.githubusercontent.com/104839344/212175190-50d1a982-c059-4a62-834f-fd2484f53796.gif)
 
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+In this project I implement a pathfinding algorithm called Flow Field 
+that is very efficient for handeling a big group of agents when it comes to pathfinding. 
+I created this project For gameplay programming a course i follow at Howest https://www.digitalartsandentertainment.be/ DAE
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
