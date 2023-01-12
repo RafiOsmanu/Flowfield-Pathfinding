@@ -205,6 +205,6 @@ void App_PathfindingFlowField::CalculatePath()
 	}
 	else
 	{
-		std::cout << "Agents Have No Goal" << std::endl;
+		std::cout << "Agents Have No Goal!" << std::endl;
 	}
 }
