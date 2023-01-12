@@ -189,5 +189,5 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[DAE]: (https://www.digitalartsandentertainment.be/)
+[DAE]: https://www.digitalartsandentertainment.be/
 
