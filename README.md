@@ -66,7 +66,7 @@ Written in c++, using a framework provided by DAE
 
 ### Built With
 
-* [[![Next][Next.js]][Next-url]](https://cplusplus.com/)
+* [C++]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -184,4 +184,5 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [DAE]: https://www.digitalartsandentertainment.be/
+[C++]: https://cplusplus.com/
 
