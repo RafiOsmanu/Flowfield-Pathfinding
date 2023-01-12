@@ -1,53 +1,6 @@
 # GPP_FlowField
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="Flow Field"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#How Is A Flow Field Made">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
-
 
 <!-- ABOUT THE PROJECT -->
 ## About-the-project
@@ -74,10 +27,30 @@ Written in c++, using a framework provided by DAE
 
 
 <!-- GETTING STARTED -->
-## How Is A Flow Field Made
+## What are Flow Fields
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+Flow Fields also know as vector field pathfinding is a technique that calculates the path from the goal to every node in the graph. 
+It can be explained in three steps.
+
+*1. First we create a heatmap that calculates the distance between the goal node and every other node on the graph
+
+![HeatMap](https://user-images.githubusercontent.com/104839344/212181669-48c5e57c-56f5-4446-b43f-afaf9c6d7808.JPG)
+
+The idea is that with creating this heatMap we calculate the path distance to the goal for every node so that 
+later on (in step 2) we can use these distances to create directionVectors
+
+*2. When we have created our heatmap, we can use that information to create a vectorMap
+
+### To calculate these vectors:
+- for every node we create vectors that points towards their neighbours 
+- we set the length of each vector to the normalized distance (we calculated this in step 1) of the neigbour node it points to
+- we take the average of all these vectors combined for every node seperated 
+
+this way u wil have a vector that point upwards the gradient (so to the +- to the node with te lowest distance).
+Like mentioned u do this for every node until every node has a vector
+
+![VectorMap](https://user-images.githubusercontent.com/104839344/212182718-876c6758-bf49-4097-8adb-6d7e3f428a86.JPG)
+
 
 ### Prerequisites
 
