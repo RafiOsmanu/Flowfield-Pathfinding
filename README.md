@@ -29,7 +29,7 @@ Written in c++, using a framework provided by DAE
 <!-- GETTING STARTED -->
 ## What are Flow Fields
 
-Flow Fields also know as vector field pathfinding is a technique that calculates the path from the goal to every node in the graph. 
+A Flow Field is also known as vector field pathfinding, this is a technique that calculates the path from the goal to every node in the graph. 
 It can be explained in three steps.
 
 *1. First we create a heatmap that calculates the distance between the goal node and every other node on the graph
@@ -41,7 +41,7 @@ later on (in step 2) we can use these distances to create directionVectors
 
 *2. When we have created our heatmap we can use that information to create a vectorMap
 
-# To calculate these vectors:
+#### To calculate these vectors:
 - for every node we create vectors that points towards their neighbours 
 - we set the length of each vector to the normalized distance (we calculated this in step 1) of the neigbour node it points to
 - we take the average of all these vectors combined and save this direction in our node
@@ -52,6 +52,8 @@ Like mentionedbefore u do this for every node until every node has a vector
 ![VectorMap](https://user-images.githubusercontent.com/104839344/212182718-876c6758-bf49-4097-8adb-6d7e3f428a86.JPG)
 
 *3. Set the velocity of your agent to the vectors u have created
+
+![agent to goal](https://user-images.githubusercontent.com/104839344/212186247-268b802b-1eb9-455d-8d62-4f17dda19a1d.JPG)
 
 This is the last step and the easiest one, you just have to check which node is at the position of your agent
 and then set the agents velocity to that of the vector that is present in that node * your agents maxVelocity
