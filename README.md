@@ -60,24 +60,90 @@ and then set the agents velocity to that of the vector that is present in that n
 
 ### Design/Implementation 
 
-#### Lets first Talk about our heatMap and how we calculated it:
+#### Heatmap Implementation :
 
-- first i created an openList and a closedList that represents if a node has already been visited or not (openList = not visited, closedList = visted)
-```
-std::vector<NodeRecord> openList, closedList;
-```
-    
-- The First element I add is my goalNode, i do this because typically the goal node is added first when creating a heatMap. It is used as the starting point for the search, the algorithm works by expanding out from the goalNode and evaluating the cost of reaching other nodes in the map.
+-This is where we implement the heatMap 
 
+- We use the goal as our starting node, typically it is used as the starting point for the search, the algorithm works by expanding out from the goalNode and evaluating the cost of reaching other nodes in the map. The algorithm is able to efficiently find the shortest path to the goalNode by working backwards from the goal to the starting point.
 ```
-openList.push_back(startRecord);
+//1.HeatMap
+		//-------------------------------------------------------------
+		std::vector<NodeRecord> openList, closedList;
+
+		NodeRecord startRecord{};
+		startRecord.pNode = pGoalNode;
+		startRecord.pConnection = nullptr;
+		startRecord.costSoFar = 0;
+
+		NodeRecord currentRecord;
+
+		// place the goal node as the first node in the open list
+		openList.push_back(startRecord);
+
+		while (!openList.empty())
+		{
+			// get the node with the lowest cost from the open list and set it as the current node
+			currentRecord = *std::min_element(openList.begin(), openList.end(), [](const auto& a, const auto& b) { return a.costSoFar < b.costSoFar; });
+
+			// move the current node from the open list to the closed list
+			closedList.push_back(currentRecord);
+			openList.erase(std::remove(openList.begin(), openList.end(), currentRecord));
+
+			// get all current node's neighbours
+			for (auto& connection : m_pGraph->GetNodeConnections(currentRecord.pNode))
+			{
+				// if neighbour node is water, skip that node
+				if (m_pGraph->GetNode(connection->GetTo())->GetTerrainType() == TerrainType::Wall) continue;
+
+				auto neighbour = m_pGraph->GetNode(connection->GetTo());
+
+				// check if the neighbour is already in the closed list
+				auto closedIter = std::find_if(closedList.begin(), closedList.end(), [neighbour](const auto& record) { return record.pNode == neighbour; });
+				if (closedIter != closedList.end())
+				{
+					// if neighbour is already in closed list and has a higher cost, update its cost and connection
+					if (currentRecord.costSoFar + 1 < closedIter->costSoFar)
+					{
+						closedIter->costSoFar = currentRecord.costSoFar + 1;
+						closedIter->pConnection = connection;
+					}
+				}
+				else
+				{
+					// go through open list to see if neighbour node is already visited
+					bool nodeFound = false;
+					for (auto& olRecord : openList)
+					{
+						if (olRecord.pNode == neighbour)
+						{
+							nodeFound = true;
+							// if node is already in openList and cost is lower update openlist cost and connection
+							if (currentRecord.costSoFar + 1 < olRecord.costSoFar)
+							{
+								// set current node distance to that of the neighbour to target
+								olRecord.costSoFar = currentRecord.costSoFar + 1;
+								olRecord.pConnection = connection;
+							}
+							break;
+						}
+					}
+					if (!nodeFound)
+					{
+						// create a new record for this neighbour node
+						NodeRecord neighbourRecord{};
+						neighbourRecord.pNode = neighbour;
+						neighbourRecord.pConnection = connection;
+						neighbourRecord.costSoFar = currentRecord.costSoFar + 1;
+						// put the neighbour node in the open list
+						openList.push_back(neighbourRecord);
+					}
+				}
+			}
+			//save The distance inside the corresponding node 
+			currentRecord.pNode->SetDistance(static_cast<int>(currentRecord.costSoFar));
+		}
 ```
-- We use a while loop that breaks if the open list is empty meaning al the nodes have been visited
-```
-while (!openList.empty())
-    {
-    }
- ```
+
  
 * npm
   ```sh
