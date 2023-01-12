@@ -39,18 +39,22 @@ It can be explained in three steps.
 The idea is that with creating this heatMap we calculate the path distance to the goal for every node so that 
 later on (in step 2) we can use these distances to create directionVectors
 
-*2. When we have created our heatmap, we can use that information to create a vectorMap
+*2. When we have created our heatmap we can use that information to create a vectorMap
 
-### To calculate these vectors:
+# To calculate these vectors:
 - for every node we create vectors that points towards their neighbours 
 - we set the length of each vector to the normalized distance (we calculated this in step 1) of the neigbour node it points to
-- we take the average of all these vectors combined for every node seperated 
+- we take the average of all these vectors combined and save this direction in our node
 
-this way u wil have a vector that point upwards the gradient (so to the +- to the node with te lowest distance).
-Like mentioned u do this for every node until every node has a vector
+this way u wil have a vector that point upwards the gradient (so to the +- to the neighbour node with te lowest distance).
+Like mentionedbefore u do this for every node until every node has a vector
 
 ![VectorMap](https://user-images.githubusercontent.com/104839344/212182718-876c6758-bf49-4097-8adb-6d7e3f428a86.JPG)
 
+*3. Set the velocity of your agent to the vectors u have created
+
+This is the last step and the easiest one, you just have to check which node is at the position of your agent
+and then set the agents velocity to that of the vector that is present in that node * your agents maxVelocity
 
 ### Prerequisites
 
