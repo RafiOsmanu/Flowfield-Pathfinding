@@ -32,7 +32,7 @@
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#How Is A Flow Field Made">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
@@ -74,7 +74,7 @@ Written in c++, using a framework provided by DAE
 
 
 <!-- GETTING STARTED -->
-## Getting Started
+## How Is A Flow Field Made
 
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
