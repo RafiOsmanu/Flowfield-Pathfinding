@@ -65,8 +65,8 @@ and then set the agents velocity to that of the vector that is present in that n
 -This is where we implement the heatMap 
 
 - We use the goal as our starting node, typically it is used as the starting point for the search, the algorithm works by expanding out from the goalNode and evaluating the cost of reaching other nodes in the map. The algorithm is able to efficiently find the shortest path to the goalNode by working backwards from the goal to the starting point.
-```
-//1.HeatMap
+```cpp
+		//1.HeatMap
 		//-------------------------------------------------------------
 		std::vector<NodeRecord> openList, closedList;
 
