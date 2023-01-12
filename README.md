@@ -56,7 +56,9 @@
 
 In this project I implement a pathfinding algorithm called Flow Field 
 that is very efficient for handeling a big group of agents when it comes to pathfinding. 
-I created this project For gameplay programming a course i follow at Howest https://www.digitalartsandentertainment.be/ DAE
+I created this project For gameplay programming a course i follow at Howest [DAE]
+
+Written in c++, using a framework provided by DAE
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -187,4 +189,5 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[DAE]: (https://www.digitalartsandentertainment.be/)
 
