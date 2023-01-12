@@ -60,7 +60,22 @@ and then set the agents velocity to that of the vector that is present in that n
 
 ### Design/Implementation 
 
-This is an example of how to list things you need to use the software and how to install them.
+#### Lets first Talk about our heatMap and how we calculated it:
+
+- first i created an openList and a closedList that represents if a node has already been visited or not (openList = not visited, closedList = visted)
+```std::vector<NodeRecord> openList, closedList;
+```
+    
+- The First element I add is my goalNode, i do this because typically the goal node is added first when creating a heatMap. It is used as the starting point for the search, the algorithm works by expanding out from the goalNode and evaluating the cost of reaching other nodes in the map.
+
+```openList.push_back(startRecord);
+```
+- We use a while loop that breaks if the open list is empty meaning al the nodes have been visited
+```while (!openList.empty())
+		{
+    }
+ ```
+ 
 * npm
   ```sh
   npm install npm@latest -g
