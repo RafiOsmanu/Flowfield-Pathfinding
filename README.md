@@ -144,104 +144,116 @@ and then set the agents velocity to that of the vector that is present in that n
 		}
 ```
 
- 
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+#### Vector Implementation :
 
-### Installation
+- now that we have all the distances calculated we can use them to make the direction vectors that will lead our agent to the goal
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+```cpp
+
+		//2.Vector Kernel Convolution
+		//Combined direction given by the gradient + direction given by minimum distance value neighbour
+		//-------------------------------------------------------------
+		for (auto& node : closedList)
+		{
+			Vector2 flowFieldVector{};
+			int ClosestDistance{100};
+			bool wallAmongNeighbour{};
+			int neighbourAmount{};
+
+			//check if any of the neighbours is a wall or node is on edge of grid
+			for (auto& neighbour : m_pGraph->GetNodeConnections(node.pNode))
+			{
+				if (m_pGraph->GetNode(neighbour->GetTo())->GetTerrainType() == TerrainType::Wall || 
+				m_pGraph->GetNodeConnections(node.pNode).size() < 4) wallAmongNeighbour = true;
+			}
+
+			//if true
+			if (wallAmongNeighbour)
+			{
+				//make vector from node to all its neighbours
+				for (auto& neighbour : m_pGraph->GetNodeConnections(node.pNode))
+				{
+					//vectors pointing from center to neighbours
+					Vector2 vectorToNeighbour = m_pGraph->GetNodeWorldPos(m_pGraph->GetNode(neighbour->GetTo())) - 
+					m_pGraph->GetNodeWorldPos(node.pNode);
+
+					//calculate the neighbour with lowest cost 
+					if (m_pGraph->GetNode(neighbour->GetTo())->GetDistance() < ClosestDistance)
+					{
+						ClosestDistance = m_pGraph->GetNode(neighbour->GetTo())->GetDistance();
+						flowFieldVector = vectorToNeighbour. GetNormalized();
+					}
+				}
+			}
+			else
+			{
+				for (auto& neighbour : m_pGraph->GetNodeConnections(node.pNode))
+				{
+					//vectors pointing from center to neighbours
+					Vector2 vectorToNeighbour = m_pGraph->GetNodeWorldPos(node.pNode) 
+					- m_pGraph->GetNodeWorldPos(m_pGraph->GetNode(neighbour->GetTo()));
+					
+					float distance = static_cast<float>(m_pGraph->GetNode(neighbour->GetTo())->GetDistance());
+
+					//add to the vector and calulate average later 
+					flowFieldVector += vectorToNeighbour.GetNormalized() * distance;
+					++neighbourAmount;
+				}
+			}
+			
+			//calculate average -> kernel convolution technique
+			if (neighbourAmount > 0)
+			{
+				flowFieldVector /= static_cast<float>(neighbourAmount);
+			}
+
+			//set the direction in the node 
+			node.pNode->SetDirection(flowFieldVector);
+		}
+```
+
+##### Design Choice VectorMap 
+- As u can see i did not only calculate the direction vectors by using the technique I described before, I alse make use of taking the neighbour with the lowest distance 
+- i combined these techniques because taking the average gives u a more organic flow, but is not so accurate when you have neighbours that are walls
+- taking the lowest distance isn't very accurate but give u the better outcome when u happen to be next to a wall
+
+#### Setting the agents velocity to the calculated direction vectors:
+
+- Finally like i said before, we simply just check on wich node our agent is and use that node his velocity to set the velocity of the agent
+- we then multiply it by the maxVelocity of the agent to create our speed
+```cpp
+		//3. Set agent direction to flow map
+		//-------------------------------------------------------------
+		
+		for (auto& agent : pAgents)
+		{
+			if (m_pGraph->GetNodeAtWorldPos(agent->GetPosition()))
+			{
+				if (m_pGraph->GetNodeAtWorldPos(agent->GetPosition()) != pGoalNode)
+					agent->SetLinearVelocity(m_pGraph->GetNodeAtWorldPos(agent->GetPosition())->GetDirection() * agent->GetMaxLinearSpeed());
+				else
+					agent->SetLinearVelocity({ 0.f, 0.f });
+			}
+		}
+```
+
+
+### Result
+
+- As finished result u get a pathfinder that can take in alot of agents 
+
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/104839344/212194558-a351a909-3419-42f0-950c-9429bc57dec4.gif)
+
+## Conclusion 
+
+This research project has helped me in becoming a better c++ programmer and having more understanting about concepts we discussed this semester.
+Flow Field is not a "one shoe fits all" problem solver, but it is definetly usefull and interesting for game development.
+
+I wanted to do crowd simulation/ crowd avoiding algorithms first but didnt have the time, so i am interested in researching these topics in the future.
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
