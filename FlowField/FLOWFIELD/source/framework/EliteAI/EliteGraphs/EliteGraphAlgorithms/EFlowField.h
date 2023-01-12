@@ -61,7 +61,6 @@ namespace Elite
 	{
 		//1.HeatMap
 		//-------------------------------------------------------------
-		std::vector<T_NodeType*> path;
 		std::vector<NodeRecord> openList, closedList;
 
 		NodeRecord startRecord{};
@@ -90,6 +89,7 @@ namespace Elite
 				if (m_pGraph->GetNode(connection->GetTo())->GetTerrainType() == TerrainType::Wall) continue;
 
 				auto neighbour = m_pGraph->GetNode(connection->GetTo());
+
 				// check if the neighbour is already in the closed list
 				auto closedIter = std::find_if(closedList.begin(), closedList.end(), [neighbour](const auto& record) { return record.pNode == neighbour; });
 				if (closedIter != closedList.end())
@@ -132,11 +132,11 @@ namespace Elite
 					}
 				}
 			}
+			//save The distance inside the corresponding node 
 			currentRecord.pNode->SetDistance(static_cast<int>(currentRecord.costSoFar));
 		}
 
-		std::vector<Vector2> vectorMap;
-		int i{};
+		
 		//2.Vector Kernel Convolution
 		//Combined direction given by the gradient + direction given by minimum distance value neighbour
 		//-------------------------------------------------------------
@@ -146,18 +146,23 @@ namespace Elite
 			int ClosestDistance{100};
 			bool wallAmongNeighbour{};
 			int neighbourAmount{};
+
+			//check if any of the neighbours is a wall or node is on edge of grid
 			for (auto& neighbour : m_pGraph->GetNodeConnections(node.pNode))
 			{
-				i = m_pGraph->GetNodeConnections(node.pNode).size();
 				if (m_pGraph->GetNode(neighbour->GetTo())->GetTerrainType() == TerrainType::Wall || m_pGraph->GetNodeConnections(node.pNode).size() < 4) wallAmongNeighbour = true;
 			}
 
+			//if true
 			if (wallAmongNeighbour)
 			{
+				//make vector from node to all its neighbours
 				for (auto& neighbour : m_pGraph->GetNodeConnections(node.pNode))
 				{
 					//vectors pointing from center to neighbours
 					Vector2 vectorToNeighbour = m_pGraph->GetNodeWorldPos(m_pGraph->GetNode(neighbour->GetTo())) - m_pGraph->GetNodeWorldPos(node.pNode);
+
+					//calculate the neighbour with lowest cost 
 					if (m_pGraph->GetNode(neighbour->GetTo())->GetDistance() < ClosestDistance)
 					{
 						ClosestDistance = m_pGraph->GetNode(neighbour->GetTo())->GetDistance();
@@ -172,6 +177,8 @@ namespace Elite
 					//vectors pointing from center to neighbours
 					Vector2 vectorToNeighbour = m_pGraph->GetNodeWorldPos(node.pNode) - m_pGraph->GetNodeWorldPos(m_pGraph->GetNode(neighbour->GetTo()));
 					float distance = static_cast<float>(m_pGraph->GetNode(neighbour->GetTo())->GetDistance());
+
+					//add to the vector and calulate average later 
 					flowFieldVector += vectorToNeighbour.GetNormalized() * distance;
 					++neighbourAmount;
 				}
