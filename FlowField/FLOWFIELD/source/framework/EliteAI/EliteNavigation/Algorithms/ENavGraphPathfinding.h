@@ -3,7 +3,7 @@
 #include <iostream>
 #include "framework/EliteMath/EMath.h"
 #include "framework\EliteAI\EliteGraphs\ENavGraph.h"
-#include "framework\EliteAI\EliteGraphs\EliteGraphAlgorithms\EAStar.h"
+#include "framework\EliteAI\EliteGraphs\EliteGraphAlgorithms\EFlowField.h"
 
 namespace Elite
 {
@@ -61,16 +61,16 @@ namespace Elite
 				graphClone->AddConnection(connection);
 			}
 
-			auto pathfinder = AStar<NavGraphNode, GraphConnection2D>(graphClone.get(), Elite::HeuristicFunctions::Chebyshev);
+			//auto pathfinder = AStar<NavGraphNode, GraphConnection2D>(graphClone.get(), Elite::HeuristicFunctions::Chebyshev);
 
-			std::vector<NavGraphNode*> pathNodes{ pathfinder.FindPath(startNode, endNode) };
+			//std::vector<NavGraphNode*> pathNodes{ pathfinder.FindPath(startNode, endNode) };
 
-			for (NavGraphNode*& node : pathNodes)
+			/*for (NavGraphNode*& node : pathNodes)
 			{
 				finalPath.push_back(node->GetPosition());
-			}
+			}*/
 			
-			debugNodePositions = finalPath;
+			//debugNodePositions = finalPath;
 			
 			//Create extra node for the endNode
 			
@@ -79,10 +79,10 @@ namespace Elite
 			//OPTIONAL BUT ADVICED: Debug Visualisation
 
 			//Run optimiser on new graph, MAKE SURE the A star path is working properly before starting this section and uncommenting this!!!
-			const auto portals = SSFA::FindPortals(pathNodes, pNavGraph->GetNavMeshPolygon());
+			/*const auto portals = SSFA::FindPortals(pathNodes, pNavGraph->GetNavMeshPolygon());
 			finalPath = SSFA::OptimizePortals(portals);
 
-			debugPortals = portals;
+			debugPortals = portals;*/
 
 			return finalPath;
 		}

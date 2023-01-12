@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ENavGraph.h"
-#include "framework\EliteAI\EliteGraphs\EliteGraphAlgorithms\EAStar.h"
+#include "framework\EliteAI\EliteGraphs\EliteGraphAlgorithms\EFlowField.h"
 
 using namespace Elite;
 
@@ -90,7 +90,7 @@ void Elite::NavGraph::CreateNavigationGraph()
 		}
 		else if (validNodes.size() == 3)
 		{
-			for (int i{}; i < validNodes.size(); ++i)
+			for (size_t i{}; i < validNodes.size(); ++i)
 			{
 				GraphConnection2D* connection{ new GraphConnection2D{} };
 				connection->SetFrom(validNodes[i]);

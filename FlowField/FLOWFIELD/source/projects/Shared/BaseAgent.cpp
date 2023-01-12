@@ -49,15 +49,23 @@ void BaseAgent::TrimToWorld(const Elite::Vector2& bottomLeft, const Elite::Vecto
 
 	if (isWorldLooping)
 	{
-		if (pos.x > topRight.x)
-			pos.x = bottomLeft.x;
-		else if (pos.x < bottomLeft.x)
-			pos.x = topRight.x;
+		if (pos.x > topRight.x - 1.f)
+		{
+			pos.x = topRight.x - 1.f;
+		}
+		else if (pos.x < bottomLeft.x + 1.f)
+		{
+			pos.x = bottomLeft.x + 1.f;
+		}
 
-		if (pos.y > topRight.y)
-			pos.y = bottomLeft.y;
-		else if (pos.y < bottomLeft.y)
-			pos.y = topRight.y;
+		if (pos.y > topRight.y - 1.f )
+		{
+			pos.y = topRight.y - 1.f;
+		}
+		else if (pos.y < bottomLeft.y + 1.f)
+		{
+			pos.y = bottomLeft.y + 1.f;
+		}
 	}
 	else
 	{

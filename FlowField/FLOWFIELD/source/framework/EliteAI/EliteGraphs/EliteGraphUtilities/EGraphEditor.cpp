@@ -13,18 +13,16 @@ bool Elite::GraphEditor::UpdateGraph(GridGraph<GridTerrainNode, GraphConnection>
 		int const height = DEBUGRENDERER2D->GetActiveCamera()->GetHeight();
 		bool windowActive = true;
 		ImGui::SetNextWindowPos(ImVec2(10, 10));
-		ImGui::SetNextWindowSize(ImVec2((float)menuWidth, (float)height/2.0f));
-		ImGui::Begin("Grid Editing", &windowActive, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize );
+		ImGui::SetNextWindowSize(ImVec2((float)menuWidth, (float)height/5.0f));
+		ImGui::Begin("Path Editing", &windowActive, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize );
 		ImGui::PushAllowKeyboardFocus(false);
 
-		ImGui::Text("Terrain Type");
+		ImGui::Text("Choose Tool");
 		ImGui::Indent();
-		if (ImGui::Combo("", &m_SelectedTerrainType, "Ground\0Mud\0Water", 3))
+		if (ImGui::Combo("", &m_SelectedTerrainType, "Remove\0Wall", 3))
 		{
 
 		}
-		
-		/*Spacing*/ImGui::Spacing(); ImGui::Separator(); ImGui::Spacing(); ImGui::Spacing();
 
 		//End
 		ImGui::PopAllowKeyboardFocus();
@@ -44,13 +42,13 @@ bool Elite::GraphEditor::UpdateGraph(GridGraph<GridTerrainNode, GraphConnection>
 		
 		if (idx != invalid_node_index)
 		{
-			std::vector<TerrainType> terrainTypeVec{ TerrainType::Ground, TerrainType::Mud, TerrainType::Water };
+			std::vector<TerrainType> terrainTypeVec{ TerrainType::Ground, TerrainType::Wall };
 
 			pGraph->GetNode(idx)->SetTerrainType(terrainTypeVec[m_SelectedTerrainType]);
 			
 			switch (terrainTypeVec[m_SelectedTerrainType])
 			{
-			case TerrainType::Water:
+			case TerrainType::Wall:
 				pGraph->RemoveConnectionsToAdjacentNodes(idx);
 				break;
 			default:

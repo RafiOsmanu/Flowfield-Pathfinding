@@ -39,8 +39,8 @@ typedef App_GraphTheory CurrentApp;
 #endif
 
 #ifdef ActiveApp_AStar
-#include "projects/Movement/Pathfinding/AStar/App_PathfindingAStar/App_PathfindingAStar.h"
-typedef App_PathfindingAStar CurrentApp;
+#include "projects/Movement/Pathfinding/FlowField/App_PathfindingFlowField/App_PathfindingFlowField.h"
+typedef App_PathfindingFlowField CurrentApp;
 #endif
 
 #ifdef ActiveApp_NavMeshGraph

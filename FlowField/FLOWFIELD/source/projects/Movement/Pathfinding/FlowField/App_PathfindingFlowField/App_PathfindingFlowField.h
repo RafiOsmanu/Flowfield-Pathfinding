@@ -8,17 +8,18 @@
 #include "framework\EliteAI\EliteGraphs\EliteGraphUtilities\EGraphEditor.h"
 #include "framework\EliteAI\EliteGraphs\EliteGraphUtilities\EGraphRenderer.h"
 #include "framework\EliteAI\EliteNavigation\ENavigation.h"
+#include "projects/Movement/SteeringBehaviors/SteeringAgent.h"
 
 
 //-----------------------------------------------------------------
 // Application
 //-----------------------------------------------------------------
-class App_PathfindingAStar final : public IApp
+class App_PathfindingFlowField final : public IApp
 {
 public:
 	//Constructor & Destructor
-	App_PathfindingAStar() = default;
-	virtual ~App_PathfindingAStar();
+	App_PathfindingFlowField() = default;
+	virtual ~App_PathfindingFlowField();
 
 	//App Functions
 	void Start() override;
@@ -29,8 +30,10 @@ private:
 	struct DebugSettings
 	{
 		bool DrawNodes{ true };
-		bool DrawNodeNumbers{ false };
-		bool DrawConnections{ false };
+		bool DrawNodeDistance{ false };
+		bool DrawrenderVectors{ false };
+
+		//extra
 		bool DrawConnectionCosts{ false };
 	};
 
@@ -67,7 +70,15 @@ private:
 	void CalculatePath();
 
 	//C++ make the class non-copyable
-	App_PathfindingAStar(const App_PathfindingAStar&) = delete;
-	App_PathfindingAStar& operator=(const App_PathfindingAStar&) = delete;
+	App_PathfindingFlowField(const App_PathfindingFlowField&) = delete;
+	App_PathfindingFlowField& operator=(const App_PathfindingFlowField&) = delete;
+
+	//agents for flowField
+	std::vector<SteeringAgent*> m_psteeringAgents;
+
+	int m_AgentsAmount;
+
+	Elite::Vector2 m_BottomleftWorld;
+	Elite::Vector2 m_TopRightWorld;
 };
 #endif

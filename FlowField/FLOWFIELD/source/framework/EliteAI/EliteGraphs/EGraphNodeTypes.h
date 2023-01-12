@@ -54,7 +54,7 @@ namespace Elite
 	{
 	public:
 		GridTerrainNode(int index)
-			: GraphNode(index), m_Terrain(TerrainType::Ground)
+			: GraphNode(index), m_Terrain(TerrainType::Ground), m_Distance{}, m_Direction{}
 		{
 		}
 		virtual ~GridTerrainNode() = default;
@@ -66,21 +66,28 @@ namespace Elite
 		{
 			switch (m_Terrain)
 			{
-			case TerrainType::Mud:
-				return MUD_NODE_COLOR;
-				break;
-			case TerrainType::Water:
-				return WATER_NODE_COLOR;
+			case TerrainType::Wall:
+				return { 0.f /255.f , 168.f / 255.f, 107.f / 255.f, 1.8f};
 				break;
 			default:
 				return GROUND_NODE_COLOR;
 				break;
 			}
 		}
+
+		//Node distance to goal
+		void SetDistance(int distance) { m_Distance = distance; }
+		int GetDistance() { return m_Distance; }
+
+		//Node direction to goal
+		void SetDirection(Vector2 direction) { m_Direction = direction; }
+		Vector2 GetDirection() { return m_Direction; }
 		
 
 	protected:
 		TerrainType m_Terrain;
+		int m_Distance;
+		Vector2 m_Direction;
 	};
 
 
