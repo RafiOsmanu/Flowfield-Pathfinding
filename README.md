@@ -246,8 +246,6 @@ Flow Field is not a "one shoe fits all" problem solver, but it is definitely use
 
 I wanted to do crowd simulation/crowd avoiding algorithms first but didn't have the time, so I am interested in researching these topics in the future.
 
-
-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [DAE]: https://www.digitalartsandentertainment.be/
