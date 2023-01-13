@@ -215,7 +215,7 @@ and then set the agents velocity to that of the vector that is present in that n
 ##### Design Choice VectorMap 
 - As u can see i did not only calculate the direction vectors by using the technique I described before, I alse make use of taking the neighbour with the lowest distance 
 - i combined these techniques because taking the average gives u a more organic flow, but is not so accurate when you have neighbours that are walls
-- taking the lowest distance isn't very accurate but give u the better outcome when u happen to be next to a wall
+- taking the lowest distance isn't very organic but gives u the better outcome when u happen to be next to a wall
 
 #### Setting the agents velocity to the calculated direction vectors:
 
