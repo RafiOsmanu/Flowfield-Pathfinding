@@ -1,9 +1,9 @@
-# GPP_FlowField
+# <div align="center">Flow Field For Agent PathFinding</div>
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="Flow Field"></a>
 
 <!-- ABOUT THE PROJECT -->
-## About-the-project
+## About the project
 ![FlowFieldGiphy](https://user-images.githubusercontent.com/104839344/212175190-50d1a982-c059-4a62-834f-fd2484f53796.gif)
 
 
