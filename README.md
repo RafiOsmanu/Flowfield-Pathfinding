@@ -8,7 +8,7 @@
 
 
 In this project I implement a pathfinding algorithm called Flow Field 
-that is very efficient for handeling a big group of agents when it comes to pathfinding. 
+that is very efficient for handling a big group of agents when it comes to pathfinding. 
 I created this project For gameplay programming a course i follow at Howest [DAE]
 
 Written in c++, using a framework provided by DAE
