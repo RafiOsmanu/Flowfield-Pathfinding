@@ -46,8 +46,8 @@ later on (in step 2) we can use these distances to create directionVectors
 - we set the length of each vector to the normalized distance (we calculated this in step 1) of the neigbour node it points to
 - we take the average of all these vectors combined and save this direction in our node
 
-this way u wil have a vector that point upwards the gradient (so to the +- to the neighbour node with te lowest distance).
-Like mentionedbefore u do this for every node until every node has a vector
+this way u wil have a vector that point upwards the gradient (so to the +- the neighbour node with te lowest distance).
+Like mentioned before u do this for every node until every node has a vector
 
 ![VectorMap](https://user-images.githubusercontent.com/104839344/212182718-876c6758-bf49-4097-8adb-6d7e3f428a86.JPG)
 
