@@ -9,7 +9,7 @@
 
 In this project I implement a pathfinding algorithm called Flow Field 
 that is very efficient for handling a big group of agents when it comes to pathfinding. 
-I created this project For gameplay programming a course i follow at Howest [DAE]
+I created this project for gameplay programming, a course at Howest [DAE].
 
 Written in c++, using a framework provided by DAE
 
@@ -22,49 +22,44 @@ Written in c++, using a framework provided by DAE
 * [C++]
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- GETTING STARTED -->
 ## What are Flow Fields
 
-A Flow Field is also known as vector field pathfinding, this is a technique that calculates the path from the goal to every node in the graph. 
+A flow field is also known as vector field pathfinding, this is a technique that calculates the path from the goal to every node in the graph. 
 It can be explained in three steps.
 
-*1. First we create a heatmap that calculates the distance between the goal node and every other node on the graph
+1. First we create a heatmap that calculates the distance between the goal node and every other node on the graph.
 
 ![HeatMap](https://user-images.githubusercontent.com/104839344/212181669-48c5e57c-56f5-4446-b43f-afaf9c6d7808.JPG)
 
-The idea is that with creating this heatMap we calculate the path distance to the goal for every node so that 
+The idea is that by creating this heatMap we calculate the length of the path to the goal for every node so that 
 later on (in step 2) we can use these distances to create directionVectors
 
-*2. When we have created our heatmap we can use that information to create a vectorMap
+2. When we have created our heatmap we can use that information to create a vectorMap.
 
 #### To calculate these vectors:
-- for every node we create vectors that points towards their neighbours 
-- we set the length of each vector to the normalized distance (we calculated this in step 1) of the neigbour node it points to
-- we take the average of all these vectors combined and save this direction in our node
+2.1 For every node we create vectors that points towards their neighbours. 
+2.2 Then set the length of each vector to the normalized distance (we calculated this in step 1) of the neigbour node it points to.
+2.3 Finally we take the average of all these vectors combined and save this direction in our node.
 
-this way u wil have a vector that point upwards the gradient (so to the +- the neighbour node with te lowest distance).
-Like mentioned before u do this for every node until every node has a vector
+You will have a vector that points in the direction of the upward gradient, towards the neighboring node with the lowest distance. This process is repeated for every node until every node has a vector.
 
 ![VectorMap](https://user-images.githubusercontent.com/104839344/212182718-876c6758-bf49-4097-8adb-6d7e3f428a86.JPG)
 
-*3. Set the velocity of your agent to the vectors u have created
+3. Set the velocity of your agent to the vectors u have created
 
 ![agent to goal](https://user-images.githubusercontent.com/104839344/212186247-268b802b-1eb9-455d-8d62-4f17dda19a1d.JPG)
 
-This is the last step and the easiest one, you just have to check which node is at the position of your agent
-and then set the agents velocity to that of the vector that is present in that node * your agents maxVelocity
+The last step is pretty straightforward, you have to check which node is at the position of your agent
+and then set the agents velocity to that of the vector that is present in that node multiplied by your agents maximun speed.
 
-### Design/Implementation 
+## Design/Implementation 
 
 #### Heatmap Implementation :
 
--This is where we implement the heatMap 
-
-- We use the goal as our starting node, typically it is used as the starting point for the search, the algorithm works by expanding out from the goalNode and evaluating the cost of reaching other nodes in the map. The algorithm is able to efficiently find the shortest path to the goalNode by working backwards from the goal to the starting point.
+- Typically the goal node is used as the starting point for the search, the algorithm works by expanding out from the goal node and evaluating the cost of reaching other nodes in the map. The algorithm is able to efficiently find the shortest path to the goalNode by working backwards from the goal to the starting point.
 ```cpp
 		//1.HeatMap
 		//-------------------------------------------------------------
@@ -146,7 +141,7 @@ and then set the agents velocity to that of the vector that is present in that n
 
 #### Vector Implementation :
 
-- now that we have all the distances calculated we can use them to make the direction vectors that will lead our agent to the goal
+- Now that we calculated all the distances, we can use them to make the direction vectors that will lead our agent to the goal.
 
 ```cpp
 
@@ -212,15 +207,15 @@ and then set the agents velocity to that of the vector that is present in that n
 		}
 ```
 
-##### Design Choice VectorMap 
-- As u can see i did not only calculate the direction vectors by using the technique I described before, I alse make use of taking the neighbour with the lowest distance 
-- i combined these techniques because taking the average gives u a more organic flow, but is not so accurate when you have neighbours that are walls
-- taking the lowest distance isn't very organic but gives u the better outcome when u happen to be next to a wall
+#### Design Choice VectorMap 
+- I chose not to only use the technique i described before, i also make use of a technique where u take the neighbour with lowest cost.
+- I combined these techniques because taking the average gives u a more organic flow, but is not so accurate when you have neighbours that are walls.
+- Taking the lowest distance isn't very organic, but it's less accurate when you have a wall among your neighbours.
 
 #### Setting the agents velocity to the calculated direction vectors:
 
-- Finally like i said before, we simply just check on wich node our agent is and use that node his velocity to set the velocity of the agent
-- we then multiply it by the maxVelocity of the agent to create our speed
+- Finally we check which node our agent is on and use that node's velocity to set the velocity of the agent.
+- Then we multiply it by the max speed of the agent to create our final velocity.
 ```cpp
 		//3. Set agent direction to flow map
 		//-------------------------------------------------------------
@@ -240,20 +235,17 @@ and then set the agents velocity to that of the vector that is present in that n
 
 ### Result
 
-- As finished result u get a pathfinder that can take in alot of agents 
+- As finished result u get a pathfinder that can take in a lot of agents. 
 
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/104839344/212194558-a351a909-3419-42f0-950c-9429bc57dec4.gif)
 
 ## Conclusion 
 
-This research project has helped me in becoming a better c++ programmer and having more understanding about concepts we discussed this semester.
-Flow Field is not a "one shoe fits all" problem solver, but it is definetly usefull and interesting for game development.
+This research project has helped me become a better c++ programmer and getting a better understanding about concepts we discussed this semester.
+Flow Field is not a "one shoe fits all" problem solver, but it is definitely useful and interesting for game development.
 
-I wanted to do crowd simulation/ crowd avoiding algorithms first but didnt have the time, so i am interested in researching these topics in the future.
+I wanted to do crowd simulation/crowd avoiding algorithms first but didn't have the time, so I am interested in researching these topics in the future.
 
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
