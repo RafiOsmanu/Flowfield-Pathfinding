@@ -242,7 +242,7 @@ and then set the agents velocity to that of the vector that is present in that n
 ## Conclusion 
 
 This research project has helped me become a better c++ programmer and getting a better understanding about concepts we discussed this semester.
-Flow Field is not a "one shoe fits all" problem solver, but it is definitely useful and interesting for game development.
+Flow Field is not a "one size fits all" problem solver, but it is definitely useful and interesting for game development.
 
 I wanted to do crowd simulation/crowd avoiding algorithms first but didn't have the time, so I am interested in researching these topics in the future.
 
