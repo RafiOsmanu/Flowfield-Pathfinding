@@ -35,7 +35,7 @@ It can be explained in three steps.
 ![HeatMap](https://user-images.githubusercontent.com/104839344/212181669-48c5e57c-56f5-4446-b43f-afaf9c6d7808.JPG)
 
 The idea is that by creating this heat map we calculate the length of the path to the goal for every node so that 
-later on (in step 2) we can use these distances to create direction vectors
+later on (in step 2) we can use these distances to create direction vectors.
 
 **2. When we have created our heatmap we can use that information to create a vector map.**
 
@@ -53,7 +53,7 @@ You will have a vector that points in the direction of the upward gradient, towa
 ![agent to goal](https://user-images.githubusercontent.com/104839344/212186247-268b802b-1eb9-455d-8d62-4f17dda19a1d.JPG)
 
 The last step is pretty straightforward, you have to check which node is at the position of your agent
-and then set the agents velocity to that of the vector that is present in that node multiplied by your agents maximun speed.
+and then set the agents velocity to that of the vector that is present in that node multiplied by your agents maximum speed.
 
 ## Design/Implementation 
 
