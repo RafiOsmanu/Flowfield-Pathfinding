@@ -59,7 +59,7 @@ and then set the agents velocity to that of the vector that is present in that n
 
 #### Heatmap Implementation :
 
-- Typically the goal node is used as the starting point for the search, the algorithm works by expanding out from the goal node and evaluating the cost of reaching other nodes in the map. The algorithm is able to efficiently find the shortest path to the goalNode by working backwards from the goal to the starting point.
+- Typically the goal node is used as the starting point for the search, the algorithm works by expanding out from the goal node and evaluating the cost of reaching other nodes in the map. The algorithm is able to efficiently find the shortest path to the goal node by working backwards from the goal to the starting point.
 ```cpp
 		//1.HeatMap
 		//-------------------------------------------------------------
