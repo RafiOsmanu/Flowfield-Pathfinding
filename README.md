@@ -40,9 +40,11 @@ later on (in step 2) we can use these distances to create direction vectors.
 **2. When we have created our heatmap we can use that information to create a vector map.**
 
 #### To calculate these vectors:
-2.1 For every node we create vectors that points towards their neighbours. 
-2.2 Then set the length of each vector to the normalized distance (we calculated this in step 1) of the neigbour node it points to.
-2.3 Finally we take the average of all these vectors combined and save this direction in our node.
+2.1. For every node we create vectors that points towards their neighbours. 
+
+2.2. Then set the length of each vector to the normalized distance (we calculated this in step 1) of the neigbour node it points to.
+
+2.3. Finally we take the average of all these vectors combined and save this direction in our node.
 
 You will have a vector that points in the direction of the upward gradient, towards the neighboring node with the lowest distance. This process is repeated for every node until every node has a vector.
 
@@ -210,7 +212,7 @@ and then set the agents velocity to that of the vector that is present in that n
 #### Design Choice VectorMap 
 - I chose not to only use the technique i described before, i also make use of a technique where u take the neighbour with lowest cost.
 - I combined these techniques because taking the average gives u a more organic flow, but is not so accurate when you have neighbours that are walls.
-- Taking the lowest distance isn't very organic, but it's less accurate when you have a wall among your neighbours.
+- Taking the lowest distance isn't very organic, but it's more accurate when you have a wall among your neighbours.
 
 #### Setting the agents velocity to the calculated direction vectors:
 
